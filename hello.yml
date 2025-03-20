@@ -1,0 +1,13 @@
+name: Hello World Action
+
+on: push  # This workflow runs when code is pushed to the repository
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest  # Specifies the runner environment
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3  # GitHub's official action to fetch code
+
+      - name: Say Hello
+        run: echo "Hello, GitHub Actions!"  # Prints a message to the workflow logs
