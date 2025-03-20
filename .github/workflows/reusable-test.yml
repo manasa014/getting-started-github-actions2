@@ -1,0 +1,17 @@
+name: Reusable Test Workflow
+
+on:
+  workflow_call:  # Allows other workflows to call this
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
