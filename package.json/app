@@ -1,0 +1,4 @@
+- name: Install Dependencies
+  run: |
+    cd app
+    npm install
