@@ -1,0 +1,41 @@
+name: Basic Workflow
+
+on: 
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm' # Caches npm dependencies for faster installs
+
+      - name: Verify package.json
+        run: |
+          if [ -d "package.json" ]; then
+            echo "Error: package.json is a directory! Fixing..."
+            rm -rf package.json
+            npm init -y
+          fi
+
+      - name: Clean Cache and Remove Old Dependencies
+        run: |
+          rm -rf node_modules package-lock.json
+          npm cache clean --force
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build the Project
+        run: npm run build # If your project has a build script
+
+      - name: Run a Script
+        run: echo "Workflow executed successfully!"
+
